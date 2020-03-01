@@ -1,35 +1,27 @@
 <!DOCTYPE html>
 <html>
 
-<body>
+<body onload="setup()">
 
-    <h2>The XMLHttpRequest Object</h2>
+    <h2>Redirecting......</h2>
 
-    <button type="button" onclick="loadDoc()">Request data</button>
+    <!-- <button type="button" onclick="loadDoc()">Request data</button>
 
-	<nav>
-    <ol>
-        <li><a href="http://localhost:3000">link1</a></li>
-        <li><a href="http://localhost:1234/link2.html">link2</a></li>
-        <li><a href="http://localhost:1234/link3.html">link3</a></li>
-    </ol>
-</nav>
+    <nav>
+        <ol>
+            <li><a href="http://localhost:3000">link1</a></li>
+            <li><a href="http://localhost:1234/link2.html">link2</a></li>
+            <li><a href="http://localhost:1234/link3.html">link3</a></li>
+        </ol>
+    </nav> -->
     <script>
-	
-			
-		
-	
-	
-        function loadDoc() {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("demo").innerHTML = this.responseText;
-                }
-            };
-            xhttp.open("GET", "http://localhost:3000", true);
-            xhttp.send();
+
+
+
+        function setup() {
+            window.open("http://localhost:3000", "_self");
         }
+
     </script>
 
 </body>
