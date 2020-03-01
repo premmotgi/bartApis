@@ -1,0 +1,38 @@
+<div class="page-photo arrivals-photo"><div class="photo-credit-container"><span class="photo-credit">Photo by <a href="https://www.flickr.com/photos/koemu/33533006774" target="_blank">koemu</a></span></div></div>
+<div class="container">
+<div class="">
+<h1 class="display-4 pt-3">Arrival Times</h1>
+  <form method="get">
+    <div class="input-group">
+    <select class="form-control" name="stn" onchange='this.form.submit()'>
+      <option>Choose a station</option>
+      {{#each stations}}
+        <option value={{this.abbr}}>{{this.name}}</option>
+      {{/each}}
+    </select>
+    </div>
+  </form>
+</div>
+
+<div class="pt-5">
+  {{#if stnName}}
+  <h3>Arrivals at <a href="/stations/{{stn}}">{{stnName}}</a> <small class="text-muted">as of {{time}}</small></h3>
+  {{/if}}
+  <div class="arrivals pt-3">
+    <table class="table table-hover">
+    {{#each arrivals}}
+      <tr>
+        <td><i class="fas fa-circle pr-3" style="color:{{this.estimate.[0].hexcolor}};"></i>{{this.destination}}</td>
+        <td>{{#each this.estimate}}
+          {{this.minutes}}
+          {{#if @last}}
+            minutes
+          {{else}}, 
+          {{/if}}
+        {{/each}}</td>
+      </tr>
+    {{/each}}
+    </table>
+  </div>
+</div>
+</div>

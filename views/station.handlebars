@@ -1,0 +1,54 @@
+{{#if stn}}
+<div id="mapid" class="page-photo map"></div>
+<div class="container">
+<h1 class="display-4 pt-3">{{station.name}}</h1>
+<p>{{#if parking}}<a href="#parking"><button type="button" class="btn btn-light"><i class="fas fa-car"></i> Parking</button></a>{{/if}}
+{{#if bike}}<a href="#bike"><button type="button" class="btn btn-light"><i class="fas fa-bicycle"></i> Bike Parking</button></a>{{/if}}</p>
+<p class="lead">{{station.address}}<br>
+{{station.city}}, {{station.state}} {{station.zipcode}}</p>
+<p>{{station.intro.text}}</p>
+<h3>Entering the station</h3>
+<p>{{{access.entering.text}}}</p>
+<h3>Exiting the station</h3>
+<p>{{{access.exiting.text}}}</p>
+<h3 id="parking">Parking</h3>
+<p>{{{access.parking.text}}}</p>
+<h3 id="bike">Bike Parking</h3>
+{{#if bikeRacks}}<p>Bike racks are available at this station.</p>{{/if}}
+<p>{{{access.lockers.text}}}</p>
+<p>{{{access.bike_station_text.text}}}</p>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+  crossorigin=""></script>
+<script>
+	var mymap = L.map('mapid').setView([{{station.gtfs_latitude}}, {{station.gtfs_longitude}}], 15);
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	    maxZoom: 18,
+	    id: 'mapbox.streets',
+	    accessToken: 'pk.eyJ1IjoibW9iaWxlbWVsb2R5IiwiYSI6ImNpanJudHRyMjBjemh0aG01OGwzbXlnODUifQ.IFhw5wfKK-XQjitGxz1wFg'
+	}).addTo(mymap);
+	var marker = L.marker([{{station.gtfs_latitude}}, {{station.gtfs_longitude}}]).addTo(mymap);
+</script>
+
+{{else}}
+<div class="page-photo stations-photo"><div class="photo-credit-container"><span class="photo-credit">Photo by <a href="https://www.flickr.com/photos/thomashawk/13343354494" target="_blank">Thomas Hawk</a></span></div></div>
+<div class="container">
+<h1 class="display-4 pt-3">Stations</h1>
+<div class="row">
+  <div class="col-md-6">
+    <ul>
+    {{#each stations}}
+    <li><a href="stations/{{this.abbr}}">{{this.name}}</a></li>
+    {{/each}}
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <div class="system-map"><img class="d-block w-100" src="/images/BART_cc_map.png"></div>
+    <div class="pt-1"><a href="/images/BART_cc_map.png" target="_blank"><button type="button" class="btn btn-secondary btn-lg"><i class="fas fa-map pr-1"></i> Download System Map</button></a></div>
+  </div>
+</div>
+</div>
+{{/if}}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>The XMLHttpRequest Object</h2>
+
+    <button type="button" onclick="loadDoc()">Request data</button>
+
+	<nav>
+    <ol>
+        <li><a href="http://localhost:3000">link1</a></li>
+        <li><a href="http://localhost:1234/link2.html">link2</a></li>
+        <li><a href="http://localhost:1234/link3.html">link3</a></li>
+    </ol>
+</nav>
+    <script>
+	
+			
+		
+	
+	
+        function loadDoc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "http://localhost:3000", true);
+            xhttp.send();
+        }
+    </script>
+
+</body>
+
+</html>
